@@ -1,0 +1,19 @@
+Dependencies for Project 'FlashingLights', Target 'FlashingLights': (DO NOT MODIFY !)
+F (.\blink.c)(0x586849C0)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\blink.o --omf_browse .\blink.crf --depend .\blink.d)
+I (tm4c123gh6pm.h)(0x5861BC8E)
+I (random.h)(0x5861D5E9)
+F (.\flashinglights.c)(0x5877FCAF)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\flashinglights.o --omf_browse .\flashinglights.crf --depend .\flashinglights.d)
+I (tm4c123gh6pm.h)(0x5861BC8E)
+I (random.h)(0x5861D5E9)
+I (blink.h)(0x5867F5E1)
+I (sound.h)(0x5867F678)
+F (.\sound.c)(0x5877FCB5)(-c --cpu Cortex-M4 -D__EVAL -g -O0 --apcs=interwork --split_sections --signed_chars -I.. -I..\..\..-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary-Drvmdk -DPART_LM4F120H5QR-o .\sound.o --omf_browse .\sound.crf --depend .\sound.d)
+I (tm4c123gh6pm.h)(0x5861BC8E)
+I (sound.h)(0x5867F678)
+F (.\random.s)(0x5861BDE4)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\random.lst --xref -o .\random.o --depend .\random.d)
+F (.\startup.s)(0x53097250)(--cpu Cortex-M4 --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\Luminary--list .\startup.lst --xref -o .\startup.o --depend .\startup.d)
+F (.\random.h)(0x5861D5E9)()
+F (.\TExaS.h)(0x569B957E)()
+F (.\tm4c123gh6pm.h)(0x5861BC8E)()
+F (.\blink.h)(0x5867F5E1)()
+F (.\sound.h)(0x5867F678)()

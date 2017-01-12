@@ -21,7 +21,9 @@
 #include "sound.h"
 
 //declare functions
-//void Systick_Init(unsigned long period);	//initialize systick and pass in period to be used for reload value
+void Sound_GameOver(void);
+void Sound_NextLevel(void);
+void Sound_Win(void);
 void Delay1ms(unsigned long msec);
 void LED_Init(void);		//initialize LEDs of PB6-PB4
 void Blink_Red(void);		// turn on red LED
@@ -31,12 +33,12 @@ void Next_Level_Lights(void);	// flash all lights
 void Game_Over_Lights(void);		// turn all lights on
 void Game_Complete_Lights(void);	// flash all lights twice then delay
 
-//values passed into SysTick_Init to determine frequency LEDs will blink at for each level
+//values passed into Delay1ms to determine frequency the lights blink
 unsigned long levels[10] = 
- {500, 400, 300, 200, 100, 80, 60, 40, 20, 10};  // calculate correct values for this
+ {500, 400, 300, 200, 100, 80, 60, 40, 20, 10};  // msec to delay after light turned on
 unsigned int curLevel = 0;
-unsigned int curLight;
-unsigned int randomnum;
+unsigned int curLight;		// stores which LED is currently on
+unsigned int randomnum;		// used to randomize blinking order of LEDs
 
 
 //------------Switch_Init------------
@@ -61,28 +63,46 @@ void Switch_Init(void){
   NVIC_EN0_R = 0x10;      // 13) enable interrupt 4 in NVIC
 }
 
+//------------Next_Level------------
+// Increment level. Display next level LED scene and play next level audio
+// Input: none
+// Output: none
 void Next_Level(void) {
+	curLevel += 1;
 	Next_Level_Lights();
 }
 
+//------------Game_Over------------
+// Reset to the first level. Display game over LED scene and play game over audio
+// Input: none
+// Output: none
 void Game_Over(void) {
+	curLevel = 0;	
 	Game_Over_Lights();
 }
 
-void Game_Complete(void) {
+//------------Game_Complete------------
+// Display game complete LED scene and play game complete audio
+// Input: none
+// Output: none
+void Game_Complete(void) {	
 	Game_Complete_Lights();
 }
 
+//------------GPIOPortE_Handler------------
+// Rising-edge interupt for switches. Check Port B and Port E data to determine if correct switch was pressed.
+// Input: none
+// Output: none
 void GPIOPortE_Handler(void){
 	unsigned long switchPressed = GPIO_PORTE_DATA_R;
 	GPIO_PORTE_ICR_R = 0x07; // ack, clear interrupt flag 2,1,0
-	curLight = (GPIO_PORTB_DATA_R&0x70)>>4;
+	curLight = (GPIO_PORTB_DATA_R&0x70)>>4;	// read data on Port B and shift 4 bits to determine the LED that is currently on
 	if(curLight == switchPressed) {
-		curLevel += 1;
+		Sound_NextLevel();
 		Next_Level();
 	} else {
+		Sound_GameOver();
 		Game_Over();
-		curLevel = 0;
 	}
 	randomnum += 5;		// increase randomness of flashing by allowing user switch input to change random number
 	GPIO_PORTE_DATA_R = 0;
@@ -90,24 +110,22 @@ void GPIOPortE_Handler(void){
 
 int main(void) {
 	Switch_Init();
-	LED_Init();
+	LED_Init();		// initialize PB6-PB4
 	//Sound_Init();
 	
 	while(curLevel <= 10) {
 		randomnum = (Random32()>>24)%60; // a number from 0 to 59
 		if(randomnum < 20) {
-			Blink_Red();
-			curLight = 1; //red light on
+			Blink_Red(); //red light on
 			Delay1ms(levels[curLevel]);
 		} else if(randomnum >=20 && randomnum < 40) {
-			Blink_Green();
-			curLight = 2; //green light on
+			Blink_Green(); //green light on
 			Delay1ms(levels[curLevel]);
 		} else {
-			Blink_Blue();
-			curLight = 3; //blue light on
+			Blink_Blue(); //blue light on
 			Delay1ms(levels[curLevel]);
 		}
 	}
+	Sound_Win();
 	Game_Complete();
 }
