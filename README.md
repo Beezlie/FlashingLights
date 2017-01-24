@@ -10,7 +10,7 @@ Press the right button to pick the lit LED.  Choose wrong and it's game over.
 ### The .wav files must be short, since they take up a large amount of memory.
 
 1. Read the file and extract the samples as well as the frequency:
-    [Spls, fs] = wavread('blah.wav');
+  [Spls, fs] = wavread('blah.wav');
 2. Downsample it, to get it to the frequency you want (11.025 kHz):
     Spls = downsample(Spls, round(fs/11025));
 3. Adjust the samples (originals are fractions between -1 and 1) to range between 0 and 15 (4-bit)
