@@ -3,4 +3,4 @@ Three LEDs, with one LED on at a time.  With each advancing level, the LEDs blin
 Press the right button to pick the lit LED.  Choose wrong and it's game over.
 
 # Circuit Schematic
-(./Circuit Schematics.png)
+![Alt text](relative/path/to/img.jpg?raw=true "Title")
