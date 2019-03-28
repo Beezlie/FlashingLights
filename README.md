@@ -1,6 +1,6 @@
 # FlashingLights
-Three LEDs, with one LED on at a time.  With each advancing level, the LEDs blink on and off at a faster rate.  
-Press the right button to pick the lit LED.  Choose wrong and it's game over.
+Three LEDs, with one LED on at a time.  With each advancing level, the LEDs blink on and off randomly at a faster rate.  
+The objective of the game is to press the button corresponding to the lit LED before it changes.
 
 # Circuit Schematic
 ![Alt text](https://github.com/Beezlie/FlashingLights/blob/master/Circuit%20Schematics.PNG?raw=true "Title")
